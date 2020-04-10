@@ -7,10 +7,10 @@ export class NavbarContainer extends Component{
     render(){
         return(
             <div>
-                <Navbar>
+                <Navbar style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }} >
                     <NavbarBrand href="/"> Pb</NavbarBrand>
-                    <NavLink  href="/logIn">Log In</NavLink> 
-                    <NavLink href="/signUp"> Sign Up</NavLink>       
+                    <NavLink  href="/login">Log In</NavLink> 
+                    <NavLink href="/signup"> Sign Up</NavLink>       
                 </Navbar>
             </div>
         ) 

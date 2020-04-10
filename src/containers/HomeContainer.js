@@ -9,6 +9,7 @@ export class HomeContainer extends Component{
         return(
             <div>
                 < NavbarContainer />
+                
             </div>
         ) 
         
