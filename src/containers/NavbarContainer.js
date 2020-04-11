@@ -9,8 +9,7 @@ export class NavbarContainer extends Component{
             <div>
                 <Navbar style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }} >
                     <NavbarBrand href="/"> Pb</NavbarBrand>
-                    <NavLink  href="/login">Log In</NavLink> 
-                    <NavLink href="/signup"> Sign Up</NavLink>       
+                    <NavLink href="/signin"> Sign In</NavLink>       
                 </Navbar>
             </div>
         ) 

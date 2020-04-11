@@ -2,27 +2,67 @@ import React from 'react';
 
 import {HomeContainer} from './containers/HomeContainer'
 import './App.css';
-import ReactDom from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import UserContainer from './containers/UserContainer'
-import LogInContainer from './containers/LogInContainer'
-import LogInForm from './components/users/logInForm'
+import ProfileContainer from './containers/profileContainer'
+
+
+
+// function PrivateRoute({children,...rest}){
+//   return(
+//     <div>
+//     < Route 
+   
+//      />
+//     </div>
+//   )
+// }
 const App = props => {
-  
-  
+ 
+
   return(
     <div>
       <Router>
         <Route path="/" component={HomeContainer} />
-        <Route exact path="/signup" component={UserContainer} />
-        <Route exact path="/login" component={LogInContainer} />
+        <Route exact path="/signin" >
+    < UserContainer />
+          </ Route>
+      <Switch >
+      {/* < PrivateRoute to="/user/:id" /> */}
+      </Switch>
         {/* <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} /> */}
       </Router>
     </div>
     );
+  // const auth =(u) =>{
+  //   return ({
+  //     isAuthenticated: false,
+  //     auth: ()=>{return },
+  //     signOut: () => history.push("/"),
+  //     logIn: ()=>{return}
+  // })
+  }
+  // const authButton=()=>{
   
-}
+  //   return auth.isAuthenticated ? (
+  //     <p>
+  //       Welcome!{" "}
+  //       <button
+  //         onClick={() => {
+  //           auth.signOut(() => history.push("/"));
+  //         }}
+  //       >
+  //         Sign out
+  //       </button>
+  //     </p>
+  //   ) : (
+  //     <p>You are not logged in.</p>
+  //   );
+  // }
+  
+  
+
 
 
 export default App;

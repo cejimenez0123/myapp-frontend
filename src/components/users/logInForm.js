@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import {dispatch} from "react-redux"
+
+
 class LogInForm extends Component{
     constructor(){
         super()
@@ -10,18 +11,29 @@ class LogInForm extends Component{
     }
 
     hanldeOnChane = e =>{
-        debugger
         this.setState({[e.target["name"]]: e.target.value})
     }
-
+    handleOnSubmit = e => {
+        e.preventDefault()
+      
+        // try {
+        //     await Auth.signIn(this.state.username, this.state.password);
+        //     userHasAuthenticated(true);
+        //     history.push("/");
+        //   } catch (e) {
+        //     alert(e.message);
+        //   }
+    }
     render(){
         return(
-            <div>
-                <form>
+            <div id="LogInForm">
+                <form onSubmit={this.handleOnSubmit}> 
                     <label for="username">Username:</label>
                     <input type="text" name="username" onChange={this.handleOnChange}/>
+                    <br />
                     <label for="password">Password:</label>
                     <input type="password" name="name" onChange={this.handleOnChange}/>
+                    <br />
                     < input type="submit" value="Log In"/>
                 </form>
                 
