@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import UserForm from '../components/users/signUpForm'
 import { connect } from 'react-redux';
-import { SIGN_UP } from "../actions/userActions"
+import { SIGN_UP,LOG_IN } from "../actions/userActions"
 import LogInForm from "../components/users/logInForm"
-import {Route, Link} from 'react-router-dom'
-import ProfileContainer from './profileContainer'
-class UserContainer extends Component{
+
+class FormContainer extends Component{
 
 
     render(){
@@ -19,7 +18,8 @@ class UserContainer extends Component{
     }
 }
 function mapDispatchToProps(dispatch){
-    return { signUp: (user) => dispatch(SIGN_UP(user)) }
+    return { signUp: (user) => dispatch(SIGN_UP(user)),
+             logIn: (user)=> dispatch(LOG_IN(user)) }
   }
 
-export default connect( null, mapDispatchToProps)(UserContainer)
+export default connect( null, mapDispatchToProps)(FormContainer)

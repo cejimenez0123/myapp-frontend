@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 
 
 
-function SignUpForm (props){
 
 
 
-}
-class UserForm extends Component{
+
+class SignUpForm extends Component{
     constructor(){
         super()
         this.state ={
@@ -54,7 +53,7 @@ const mapStateToProps =(state)=>{
         currentUser: state.currentUser
     }
 }
-export default connect(mapStateToProps)(UserForm)
+export default connect(mapStateToProps)(SignUpForm)
 
 
 

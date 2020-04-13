@@ -18,8 +18,8 @@ function SIGN_UP (user) {
             dispatch(SIGN_UP_START);
             fetch(userPath,config).then(res => res.json()).then(obj =>{
                 let user =  obj.data.attributes
-                localStorage.setItem("currentUser",user)
-                dispatch({ type: 'SIGN_UP', obj})});
+                localStorage.setItem("currentUser",user.id)
+                dispatch({ type: 'SIGN_UP', user})});
           })
     
   }

@@ -1,21 +1,23 @@
 
 import { history } from '../helpers/history'
+
 export default function leadReducer(
     state={users: [],
-        currentUser: null , requesting: false},
+        currentUser: null,
+    loggedIn: false },
     action){
     
         switch (action.type){
             case "SIGN_UP_START":
-                debugger
                 
-                return {...state,users:[...state.users], requesting: true}
-            case "SIGN_UP":
+                return {...state,users:[...state.users]}
+            case "SIGN_UP":    
+                let user = action.user
+               
+            
+               const vote = {...state, users: [...state.users,user],loggedIn:true, currentUser: user}
                 debugger
-                
-                let user = action.obj.data.attributes
-                history.push(`/users/${user.id}`)
-                return {...state, users: [...state.users,user], currentUser: user}
+                return vote
             default:
                 return state
         }

@@ -3,7 +3,7 @@ import React from 'react';
 import {HomeContainer} from './containers/HomeContainer'
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import UserContainer from './containers/UserContainer'
+import FormContainer from './containers/FormContainer'
 import ProfileContainer from './containers/profileContainer'
 import { connect} from "react-redux"
 
@@ -17,9 +17,11 @@ render(){
   return(
     <div>
       <Router>
-        <Route path="/" component={HomeContainer} />
-        <Route exact path="/signin" >
-               < UserContainer />
+          <Route path="/">
+  {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer/>}
+          </Route>
+           <Route path="/signin" >
+               < FormContainer />
           </ Route>
           <PrivateRoute exact path="/users/:userid" >
               <ProfileContainer currentUser={this.props.currentUser}/>
@@ -39,7 +41,8 @@ render(){
 
 const mapStateToProps= (state)=>{
   return{
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    loggedIn: state.loggedIn
   }
 }
 

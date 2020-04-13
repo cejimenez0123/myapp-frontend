@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import leadReducer from './reducers/leadReducer';
  const store = createStore(
-    leadReducer,applyMiddleware(thunk)
+    leadReducer, applyMiddleware(thunk)
 );
 ReactDOM.render(
   <Provider store={store}> 
