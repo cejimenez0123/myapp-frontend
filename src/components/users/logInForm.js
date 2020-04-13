@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import {LOG_IN }from '../../actions/userActions'
 
 class LogInForm extends Component{
     constructor(){
@@ -15,14 +15,8 @@ class LogInForm extends Component{
     }
     handleOnSubmit = e => {
         e.preventDefault()
-      
-        // try {
-        //     await Auth.signIn(this.state.username, this.state.password);
-        //     userHasAuthenticated(true);
-        //     history.push("/");
-        //   } catch (e) {
-        //     alert(e.message);
-        //   }
+        
+  
     }
     render(){
         return(
@@ -41,4 +35,6 @@ class LogInForm extends Component{
         )
     }
 }
+
+
 export default LogInForm

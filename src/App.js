@@ -2,31 +2,29 @@ import React from 'react';
 
 import {HomeContainer} from './containers/HomeContainer'
 import './App.css';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import UserContainer from './containers/UserContainer'
 import ProfileContainer from './containers/profileContainer'
+import { connect} from "react-redux"
+
+import {PrivateRoute} from "./functions/privateRoute"
+
+class App extends React.Component{
 
 
 
-// function PrivateRoute({children,...rest}){
-//   return(
-//     <div>
-//     < Route 
-   
-//      />
-//     </div>
-//   )
-// }
-const App = props => {
- 
-
+render(){
   return(
     <div>
       <Router>
         <Route path="/" component={HomeContainer} />
         <Route exact path="/signin" >
-    < UserContainer />
+               < UserContainer />
           </ Route>
+          <PrivateRoute exact path="/users/:userid" >
+              <ProfileContainer currentUser={this.props.currentUser}/>
+            </PrivateRoute>
+        
       <Switch >
       {/* < PrivateRoute to="/user/:id" /> */}
       </Switch>
@@ -34,35 +32,17 @@ const App = props => {
         <Route exact path="/login" component={Login} /> */}
       </Router>
     </div>
-    );
-  // const auth =(u) =>{
-  //   return ({
-  //     isAuthenticated: false,
-  //     auth: ()=>{return },
-  //     signOut: () => history.push("/"),
-  //     logIn: ()=>{return}
-  // })
+    );}
+}
+  
+
+
+const mapStateToProps= (state)=>{
+  return{
+    currentUser: state.currentUser
   }
-  // const authButton=()=>{
-  
-  //   return auth.isAuthenticated ? (
-  //     <p>
-  //       Welcome!{" "}
-  //       <button
-  //         onClick={() => {
-  //           auth.signOut(() => history.push("/"));
-  //         }}
-  //       >
-  //         Sign out
-  //       </button>
-  //     </p>
-  //   ) : (
-  //     <p>You are not logged in.</p>
-  //   );
-  // }
-  
-  
+}
 
 
+export default connect(mapStateToProps)(App);
 
-export default App;

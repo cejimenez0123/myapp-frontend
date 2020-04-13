@@ -1,7 +1,14 @@
 import React, { Component } from "react"
+import { connect } from 'react-redux'
 
 
-export default class UserForm extends Component{
+
+function SignUpForm (props){
+
+
+
+}
+class UserForm extends Component{
     constructor(){
         super()
         this.state ={
@@ -10,6 +17,7 @@ export default class UserForm extends Component{
             password: ""
         }
     }
+   
     handleOnChange = e =>{
        
         this.setState({[e.target["name"]]: e.target.value})
@@ -18,7 +26,7 @@ export default class UserForm extends Component{
     handleOnSubmit = e =>{
         debugger
         e.preventDefault()
-        this.props.signUp(this.state)
+        this.props.signUp(this.state)    
     }
     render(){
         return(
@@ -41,6 +49,12 @@ export default class UserForm extends Component{
         )
     }
 }
+const mapStateToProps =(state)=>{
+    return {
+        currentUser: state.currentUser
+    }
+}
+export default connect(mapStateToProps)(UserForm)
 
 
 

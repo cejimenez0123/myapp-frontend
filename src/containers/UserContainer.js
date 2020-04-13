@@ -3,6 +3,8 @@ import UserForm from '../components/users/signUpForm'
 import { connect } from 'react-redux';
 import { SIGN_UP } from "../actions/userActions"
 import LogInForm from "../components/users/logInForm"
+import {Route, Link} from 'react-router-dom'
+import ProfileContainer from './profileContainer'
 class UserContainer extends Component{
 
 
