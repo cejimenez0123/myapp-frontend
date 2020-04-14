@@ -2,7 +2,6 @@
 let userPath = "http://localhost:3000/users"
 
 function SIGN_UP (user) { 
-    debugger
     let config = {
         method: 'POST',
         headers: {
@@ -16,10 +15,17 @@ function SIGN_UP (user) {
           })}
           return ((dispatch) => {
             dispatch(SIGN_UP_START);
-            fetch(userPath,config).then(res => res.json()).then(obj =>{
-                let user =  obj.data.attributes
-                localStorage.setItem("currentUser",user.id)
-                dispatch({ type: 'SIGN_UP', user})});
+            fetch(userPath,config)
+                .then(res => res.json())
+                .then(obj =>{
+                
+                    let user =  obj.data.attributes
+                    localStorage.setItem("currentUser",user.id)
+                    dispatch({ type: 'SIGN_UP', user})
+            })
+                .catch(err => {
+                    console.error(err)
+                  });
           })
     
   }

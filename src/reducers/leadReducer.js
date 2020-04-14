@@ -13,11 +13,8 @@ export default function leadReducer(
                 return {...state,users:[...state.users]}
             case "SIGN_UP":    
                 let user = action.user
-               
-            
-               const vote = {...state, users: [...state.users,user],loggedIn:true, currentUser: user}
-                debugger
-                return vote
+                return {...state, users: [...state.users,user],
+                    currentUser: user, loggedIn: true }
             default:
                 return state
         }

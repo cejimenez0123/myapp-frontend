@@ -7,8 +7,12 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import leadReducer from './reducers/leadReducer';
+import pageReducer from './reducers/pageReducer'
+import {combineReducers } from "redux"
+
+const rootReducer = combineReducers({books: pageReducer,users: leadReducer})
  const store = createStore(
-    leadReducer, applyMiddleware(thunk)
+    rootReducer, applyMiddleware(thunk)
 );
 ReactDOM.render(
   <Provider store={store}> 

@@ -41,8 +41,8 @@ render(){
 
 const mapStateToProps= (state)=>{
   return{
-    currentUser: state.currentUser,
-    loggedIn: state.loggedIn
+    currentUser: state.users.currentUser,
+    loggedIn: state.users.loggedIn
   }
 }
 

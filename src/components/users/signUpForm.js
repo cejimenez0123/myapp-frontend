@@ -23,7 +23,6 @@ class SignUpForm extends Component{
 
     }
     handleOnSubmit = e =>{
-        debugger
         e.preventDefault()
         this.props.signUp(this.state)    
     }
