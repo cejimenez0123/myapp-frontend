@@ -1,13 +1,12 @@
 export default function pageReducer(
-    state={pages:[]},
+    state={pages:[], docSaved: false},
     action){
     
         switch (action.type){
             case "ADD_PAGE":
-                debugger
-                return {...state,pages:[...state.pages, action.page]}
+                return {...state,pages:[...state.pages, action.page],docSaved: true}
             case "ADD_PAGE_START":
-                return state
+                return {...state, docSaved: false}
             default:
                 return state
         }

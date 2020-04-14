@@ -14,16 +14,23 @@ class PageForm extends React.Component{
         
     }
     handleOnSubmit(e){
-        debugger
-
-
+        e.preventDefault()
+       let text = e.target.querySelector("textarea").value
+       let title = e.target.querySelector("input#title").value
+   
+        this.props.addPage(text,title)
+            if(this.props.docSaved){
+            alert("Document Saved")          
+            } else {
+            alert("Not saved yet")
+        }
     }
-
-    render(){
+       render(){
         return(
             <div id="pageForm">
                 < button onClick={()=> this.hanldeOnClick()}> Make a Page</button>
                < form onSubmit={(e)=>this.handleOnSubmit(e)}>
+                   <input type="text" id="title"/>
                <textarea id="text" style={{display: "block"}}
                 rows="5" cols="50"></textarea>
                 < input type="submit" value="save"/>
@@ -31,13 +38,21 @@ class PageForm extends React.Component{
                 
             
             </div>
-        )
-    }
+        )}
 }
 
+ 
+
+
+
+const mapStateToProps = state =>{
+    return{
+        docSaved: state.pages.docSaved
+    }
+}
 const mapDispatchToProps = dispatch =>{
     return {
-        addPage: (page) => dispatch(addPage(page))
+        addPage: (text,title) => dispatch(addPage(text,title))
     }
 } 
-export default connect(null,mapDispatchToProps)(PageForm)
+export default connect(mapStateToProps,mapDispatchToProps)(PageForm)

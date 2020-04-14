@@ -2,7 +2,6 @@ import React from 'react'
 
 export const Profile = (props) =>{
 let user = props.currentUser
-console.log(props)
     return(
 
      <div>

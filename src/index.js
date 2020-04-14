@@ -10,7 +10,7 @@ import leadReducer from './reducers/leadReducer';
 import pageReducer from './reducers/pageReducer'
 import {combineReducers } from "redux"
 
-const rootReducer = combineReducers({books: pageReducer,users: leadReducer})
+const rootReducer = combineReducers({pages: pageReducer,users: leadReducer})
  const store = createStore(
     rootReducer, applyMiddleware(thunk)
 );

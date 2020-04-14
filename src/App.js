@@ -5,6 +5,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import FormContainer from './containers/FormContainer'
 import ProfileContainer from './containers/profileContainer'
+import PageContainer from "./containers/PageContainer"
 import { connect} from "react-redux"
 
 import {PrivateRoute} from "./functions/privateRoute"
@@ -17,19 +18,22 @@ render(){
   return(
     <div>
       <Router>
-          <Route path="/">
-  {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer/>}
-          </Route>
-           <Route path="/signin" >
+      {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer/>}
+      
+        <PrivateRoute path={`/pages/:pageId/edit`} children={<PageContainer/>}/>      
+        
+        
+        <Route path="/signin" >
                < FormContainer />
           </ Route>
+         
           <PrivateRoute exact path="/users/:userid" >
               <ProfileContainer currentUser={this.props.currentUser}/>
-            </PrivateRoute>
-        
-      <Switch >
+          </PrivateRoute>
+          
+     
       {/* < PrivateRoute to="/user/:id" /> */}
-      </Switch>
+
         {/* <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} /> */}
       </Router>
@@ -40,9 +44,10 @@ render(){
 
 
 const mapStateToProps= (state)=>{
+  let id = localStorage.getItem("pageLink")
   return{
     currentUser: state.users.currentUser,
-    loggedIn: state.users.loggedIn
+    loggedIn: state.users.loggedIn,
   }
 }
 
