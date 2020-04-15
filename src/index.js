@@ -9,14 +9,16 @@ import { Provider } from 'react-redux'
 import leadReducer from './reducers/leadReducer';
 import pageReducer from './reducers/pageReducer'
 import {combineReducers } from "redux"
-
+import ErrorBoundary from './functions/errorBoundary'
 const rootReducer = combineReducers({pages: pageReducer,users: leadReducer})
  const store = createStore(
     rootReducer, applyMiddleware(thunk)
 );
 ReactDOM.render(
   <Provider store={store}> 
+  <ErrorBoundary>
     <App />
+  </ErrorBoundary>
   </Provider>,
    document.getElementById('root')
 );

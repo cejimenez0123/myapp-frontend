@@ -7,7 +7,7 @@ import FormContainer from './containers/FormContainer'
 import ProfileContainer from './containers/profileContainer'
 import PageContainer from "./containers/PageContainer"
 import { connect} from "react-redux"
-
+import {getUsers} from "./actions/userActions"
 import {PrivateRoute} from "./functions/privateRoute"
 
 class App extends React.Component{
@@ -40,8 +40,6 @@ render(){
     </div>
     );}
 }
-  
-
 
 const mapStateToProps= (state)=>{
   let id = localStorage.getItem("pageLink")

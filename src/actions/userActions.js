@@ -43,7 +43,7 @@ const LOG_IN = (user)=>{
 
     return ((dispatch)=>{
         dispatch(LOG_IN_START);
-        debugger
+       
         fetch(userPath).then(res=>res.json()).then(user =>{
             dispatch({type: "LOG_IN"},user)
         })
@@ -54,5 +54,16 @@ function SET_CURRENT_USER(){
         type: "SET_CURRENT_USER"
     }
 }
+function getUsers(){
+    
+    return ((dispatch)=>{
+        dispatch({type: "GET_USERS_START"})
+    fetch(userPath).then(res => res.json()).then(obj=>{
+       
+        let users = obj.data
+        dispatch({type: "GET_USERS", users})
+    })})
+}
 
-export { LOG_IN,SIGN_UP, SIGN_UP_START }
+
+export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers,}
