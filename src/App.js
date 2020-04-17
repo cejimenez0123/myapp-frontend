@@ -9,7 +9,7 @@ import PageContainer from "./containers/PageContainer"
 import { connect} from "react-redux"
 import {getUsers} from "./actions/userActions"
 import {PrivateRoute} from "./functions/privateRoute"
-
+import { getAllPages, showPage} from "./actions/pageActions"
 class App extends React.Component{
 
 
@@ -18,9 +18,9 @@ render(){
   return(
     <div>
       <Router>
-      {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer/>}
+      {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer currentUser={this.props.currentUser} />}
       
-        <PrivateRoute path={`/pages/:pageId/edit`} children={<PageContainer/>}/>      
+        <PrivateRoute path={`/pages/:id`} children={<PageContainer page={this.props.currentPage} showPage={this.props.showPage} pages={this.props.pages} getAllPages={this.props.getAllPages}/>}/>      
         
         
         <Route path="/signin" >
@@ -28,7 +28,7 @@ render(){
           </ Route>
          
           <PrivateRoute exact path="/users/:userid" >
-              <ProfileContainer currentUser={this.props.currentUser}/>
+              <ProfileContainer currentUser={this.props.currentUser} pages={this.props.pages}/>
           </PrivateRoute>
           
      
@@ -40,15 +40,25 @@ render(){
     </div>
     );}
 }
-
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    getAllPages: ()=> dispatch(getAllPages()),
+    showPage: ()=>dispatch(showPage())
+    
+  }
+}
 const mapStateToProps= (state)=>{
   let id = localStorage.getItem("pageLink")
+
   return{
+  
     currentUser: state.users.currentUser,
     loggedIn: state.users.loggedIn,
+    pages: state.pages.pages.flat(),
+    currentPage: state.pages.currentPage
   }
 }
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
 

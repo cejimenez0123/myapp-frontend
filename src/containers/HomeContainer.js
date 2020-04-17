@@ -8,7 +8,7 @@ export class HomeContainer extends Component{
     render(){
         return(
             <div>
-                < NavbarContainer />
+                < NavbarContainer currentUser={this.props.currentUser}/>
                 
             </div>
         ) 

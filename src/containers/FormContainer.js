@@ -10,7 +10,7 @@ class FormContainer extends Component{
     render(){
         return(
             <div>
-                <LogInForm />
+                <LogInForm logIn={this.props.logIn} />
                 <br/>
                 <UserForm signUp={this.props.signUp}/>
             </div>

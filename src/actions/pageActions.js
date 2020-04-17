@@ -1,7 +1,6 @@
 const pageUrl = "http://127.0.0.1:3000/pages"
-
+const shareUrl = "http://127.0.0.1:3000/page_users"
 const addPage = (text,title) =>{ 
-   
     let userId = localStorage.getItem("currentUser")
     let config = {    
         method: 'POST',
@@ -33,17 +32,87 @@ const addPageStart = ()=>{
 const getPage = (id) =>{
     return((dispatch)=>{
         dispatch(getPageStart())
-        fetch(pageUrl+"/"+id+"/edit").then(res=>res.json()).then(
-            obj =>{
+        fetch(pageUrl+"/"+id+"/edit").then(res=>res.json()).then(obj =>{
                 debugger
             }
         )
     })
 
 }
+
+const getAllPages =() =>{
+    return((dispatch)=>{
+        fetch(pageUrl).then(res => res.json()).then(
+            obj => {
+                let pages = obj.data
+                dispatch({type: "GET_ALL_PAGES",pages })}
+        )
+    })
+    
+}
+const sharedPages= ()=>{
+    return((dispatch)=>{
+        fetch(shareUrl).then(res => res.json()).then(sharedPages => 
+            dispatch({type: "GET_SHARED_PAGES", sharedPages})
+        )
+    })
+}
 const getPageStart = ()=>{
     return{
         type: "GET_PAGE_START"
     }
 }
-export {addPage}
+const showPage =()=>{
+    let id = localStorage.getItem("pageLink")
+    return((dispatch)=>{
+        dispatch(showPageStart)
+        fetch(pageUrl+"/"+id).then(res=>res.json()).then(page =>{
+            debugger
+            page = page.data.attributes
+            dispatch({type: "SHOW_PAGE", page})
+        })
+    })
+}
+const updatePage=(page)=>{
+    debugger
+    let id = localStorage.getItem("pageLink")
+    let config = {    
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            text: page.text,
+            title: page.title
+          })}
+          fetch(pageUrl+"/"+id).then(res=>res.json()).then(
+              obj =>{
+                  debugger
+              }
+          )
+        
+}
+const showPageStart ={
+    type: "SHOW_PAGE_START"
+}
+const sharePage= (page)=>{
+    debugger
+    page.map(p=>{
+        debugger
+    let config = {    
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            page_id: p.dataset.pageid,
+            user_id: p.id
+          })}
+    fetch(shareUrl,config).then(res=>res.json()).then(obj=>{
+        debugger
+        alert("Sent")
+    })})
+}
+export {addPage,sharePage,getAllPages,sharedPages,showPage,updatePage}

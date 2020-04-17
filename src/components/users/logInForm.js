@@ -10,13 +10,14 @@ class LogInForm extends Component{
         }
     }
 
-    hanldeOnChane = e =>{
+    handleOnChange = e =>{
+
         this.setState({[e.target["name"]]: e.target.value})
+        console.log("state",this.state)
     }
     handleOnSubmit = e => {
         e.preventDefault()
-        
-  
+        this.props.logIn(this.state)
     }
     render(){
         return(
@@ -26,11 +27,10 @@ class LogInForm extends Component{
                     <input type="text" name="username" onChange={this.handleOnChange}/>
                     <br />
                     <label htmlFor="password">Password:</label>
-                    <input type="password" name="name" onChange={this.handleOnChange}/>
+                    <input type="password" name="password" onChange={this.handleOnChange}/>
                     <br />
                     < input type="submit" value="Log In"/>
-                </form>
-                
+                </form>    
             </div>
         )
     }

@@ -1,6 +1,6 @@
 
 let userPath = "http://localhost:3000/users"
-
+let loginPath = "http://localhost:3000/login"
 function SIGN_UP (user) { 
     let config = {
         method: 'POST',
@@ -40,12 +40,22 @@ function LOG_IN_START(){
     }
 }
 const LOG_IN = (user)=>{
-
+    let config = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: "application/json"
+            },
+            body: JSON.stringify({
+                username: user.username,
+                password: user.password  
+            })}
     return ((dispatch)=>{
         dispatch(LOG_IN_START);
        
-        fetch(userPath).then(res=>res.json()).then(user =>{
-            dispatch({type: "LOG_IN"},user)
+        fetch(loginPath,config).then(res=>res.json()).then(user =>{
+            user = user.data.attributes
+            dispatch({type: "LOG_IN",user})
         })
     })
 }
@@ -64,6 +74,18 @@ function getUsers(){
         dispatch({type: "GET_USERS", users})
     })})
 }
+function getAllUserPages(){
+    let id = localStorage.getItem("currentUser")
+    return((dispatch)=>{
+        fetch(userPath+"/"+id+"/pages").then(res => res.json()).then(
+            obj => {
+               
+                let pages = obj.data
+                dispatch({type: "GET_MY_PAGES",pages})}
+        )
+    })
+    
+}
 
 
-export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers,}
+export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers, getAllUserPages}

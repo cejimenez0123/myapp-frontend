@@ -4,16 +4,22 @@ import Page from '../components/pages/page'
 let pageUrl = "http://localhost/pages/"
 
 class PageContainer extends React.Component{
+    componentDidMount(){
+        this.props.getAllPages()
+    }
     renderPage(){
-       return this.props.pages.map((p,i)=>{
+       return this.props.pages.flat().map((p,i)=>{
             if(p.id === localStorage.getItem("pageLink")){
-            return (<Page key={i} page={p}/>)}
-        })
+                if(p.attributes){
+            return (<Page key={i} page={p.attributes} currentPage={this.props.currentPage} pages={this.props.pages}/>)
+       }else{
+           return(<Page key={i} page={p} currentPage={this.props.currentPage} pages={this.props.pages}/>)
+
+       }}})
     }
     
 
     render(){
-        debugger
         console.log(this.props)
         return(
             <div className="pageContainer">
@@ -25,7 +31,8 @@ class PageContainer extends React.Component{
 }
 const mapStateToProps = state =>{
     return {
-       pages: state.pages.pages
+       pages: state.pages.pages.flat(),
+       currentPage: state.pages.currentPage
     }
 }
 
