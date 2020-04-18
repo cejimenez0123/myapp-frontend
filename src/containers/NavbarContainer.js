@@ -1,16 +1,28 @@
 import React, { Component } from 'react'
 import {Navbar,NavLink, NavbarBrand} from 'reactstrap'
-export class NavbarContainer extends Component{
+import {connect} from 'react-redux'
+class NavbarContainer extends Component{
 
+
+    handleOnClick(){
+        this.props.endSession()
+    }
     renderIf(){
+        console.log("PRPRP",this.props.currentUser)
+        
         if (this.props.currentUser){
-            return <NavLink href={`/users/${this.props.currentUser.id}`}> Profile</NavLink> 
-        }else{
+            return (<div>
+            <NavLink href={`/users/${this.props.currentUser.id}`}> Profile</NavLink> 
+            <NavLink onClick={()=>this.handleOnClick} href={'/'}>Log Out</NavLink>
+            </div>
+            )
+    }else{
            return <NavLink href="/signin"> Sign In</NavLink> 
         }
     }
 
     render(){
+        console.log("nav",this.props)
         return(
             <div>
                 <Navbar style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }} >
@@ -22,3 +34,9 @@ export class NavbarContainer extends Component{
         
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+        currentUser: state.users.currentUser
+    }
+}
+export default connect(mapStateToProps)(NavbarContainer)

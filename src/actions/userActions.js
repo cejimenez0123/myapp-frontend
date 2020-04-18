@@ -67,6 +67,10 @@ function SET_CURRENT_USER(){
         
     })
 }
+const END_CURRENT_USER=(dispatch)=>{
+
+    dispatch({type:"END_CURRENT_USER"})
+}
 const showUser =()=>{
 
 }
@@ -85,7 +89,7 @@ function getAllUserPages(){
     return((dispatch)=>{
         fetch(userPath+"/"+id+"/pages").then(res => res.json()).then(
             obj => {
-               
+               debugger
                 let pages = obj.data
                 dispatch({type: "GET_MY_PAGES",pages})}
         )
@@ -94,4 +98,4 @@ function getAllUserPages(){
 }
 
 
-export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers, getAllUserPages,SET_CURRENT_USER}
+export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers, getAllUserPages,SET_CURRENT_USER, END_CURRENT_USER}

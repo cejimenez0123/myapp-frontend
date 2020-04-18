@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Page from '../components/pages/page'
+import NavbarContainer from './NavbarContainer'
 let pageUrl = "http://localhost/pages/"
 
 class PageContainer extends React.Component{
@@ -22,8 +23,9 @@ class PageContainer extends React.Component{
 
     render(){
         console.log(this.props)
-        return(
+        return( 
             <div className="pageContainer">
+            
                {this.renderPage()}
             </div>
         )

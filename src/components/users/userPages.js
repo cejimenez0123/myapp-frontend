@@ -24,7 +24,7 @@ const UserPages = (props)=>{
             <div id="userShareList"style={{display: "none"}}>
             <form onSubmit={(e)=>handleOnSubmit(e)}>
                 <ul>
-                {props.users.flat().slice(0,6).map((u,i)=>{  
+                {props.users.flat().map((u,i)=>{  
                    if(u.id !== props.currentUser.id){
                       let user = u.attributes
                    return (<li key={i}>

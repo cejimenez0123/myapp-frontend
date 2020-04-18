@@ -4,8 +4,10 @@ import { Inbox } from '../components/pages/inbox'
 import {Profile} from '../components/users/profile'
 import PageForm from '../components/pages/pageForm'
 import UserPages from '../components/users/userPages'
-import { getUsers,LOG_IN,getAllUserPages} from "../actions/userActions"
+import { getUsers,LOG_IN,getAllUserPages,END_CURRENT_USER} from "../actions/userActions"
 import { getAllPages, sharedPages, showPage} from "../actions/pageActions"
+import NavbarContainer from "./NavbarContainer"
+import { NavBarBrand } from 'reactstrap'
 class ProfileContainer extends React.Component{
     
 componentDidMount(){
@@ -37,7 +39,6 @@ const mapDispatchToProps= (dispatch)=>{
   GetSharedPages: ()=> dispatch(sharedPages()),
   getMyPages: ()=>dispatch(getAllUserPages()),
   showPage: ()=>dispatch(showPage())
-  
   }
 }
 const mapStateToProps = (state) => {

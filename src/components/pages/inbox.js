@@ -6,6 +6,7 @@ export class Inbox extends React.Component{
     
     
     renderBox(){
+      
        return this.props.myPages.map((page,i)=>{
             let p = page.attributes
              return < PageLinkBox key={i} id={i} page={p} users={this.props.users} currentUser={this.props.currentUser} getAllPages={this.props.getAllPages} showPage={this.props.showPage}/>

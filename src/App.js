@@ -7,7 +7,7 @@ import FormContainer from './containers/FormContainer'
 import ProfileContainer from './containers/profileContainer'
 import PageContainer from "./containers/PageContainer"
 import { connect} from "react-redux"
-import {getUsers} from "./actions/userActions"
+import {getUsers, END_CURRENT_USER} from "./actions/userActions"
 import {PrivateRoute} from "./functions/privateRoute"
 import { getAllPages, showPage} from "./actions/pageActions"
 class App extends React.Component{
@@ -18,7 +18,8 @@ render(){
   return(
     <div>
       <Router>
-      {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer currentUser={this.props.currentUser} />}
+        <Route path="/"><HomeContainer endSession={this.props.endSession}currentUser={this.props.currentUser}/></Route>
+      {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <Redirect to="/signin" />}
       
         <PrivateRoute path={`/pages/:id`} children={<PageContainer page={this.props.currentPage} showPage={this.props.showPage} pages={this.props.pages} getAllPages={this.props.getAllPages}/>}/>  
         <Route path="/signin" >
@@ -40,7 +41,8 @@ render(){
 const mapDispatchToProps = (dispatch)=>{
   return{
     getAllPages: ()=> dispatch(getAllPages()),
-    showPage: ()=>dispatch(showPage())
+    showPage: ()=>dispatch(showPage()),
+  endSession: ()=>dispatch(END_CURRENT_USER())
     
   }
 }

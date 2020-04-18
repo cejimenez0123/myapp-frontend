@@ -9,7 +9,6 @@ export default function pageReducer(
                 return {...state, docSaved: false}
             case "GET_ALL_PAGES":
               let pages = action.pages.flat()
-              debugger
             return{...state,pages:[pages],
             docSaved: false}
             case "GET_SHARED_PAGES":
@@ -20,7 +19,8 @@ export default function pageReducer(
                return {...state,currentPage: page}
             case "SHOW_PAGE_START":
                 return {...state}
-            case "GET_MY_PAGES":     
+            case "GET_MY_PAGES":    
+            debugger 
                 return{...state,myPages:[...state.myPages.concat(action.pages)]}
             case "UPDATE_PAGE":
                 return {...state,docSaved: true}
