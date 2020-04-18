@@ -68,30 +68,43 @@ const showPage =()=>{
         dispatch(showPageStart)
         fetch(pageUrl+"/"+id).then(res=>res.json()).then(page =>{
             debugger
-            page = page.data.attributes
+            page = page.data
             dispatch({type: "SHOW_PAGE", page})
         })
     })
 }
-const updatePage=(page)=>{
-    debugger
+const updatePage = (text,title) => {
+ 
     let id = localStorage.getItem("pageLink")
-    let config = {    
-        method: 'PUT',
+    const config = {    
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             Accept: "application/json"
           },
           body: JSON.stringify({
-            text: page.text,
-            title: page.title
+              id: id,
+            text: text,
+            title: title
           })}
-          fetch(pageUrl+"/"+id).then(res=>res.json()).then(
-              obj =>{
-                  debugger
-              }
-          )
-        
+     fetch(pageUrl+"/"+id,config).then(res => res.json()).then(obj=>{
+         return((dispatch)=>{dispatch({type: "UPDATE_PAGE",obj})})
+         
+     })
+}
+const DELETE_PAGE=(id)=>{
+    const config = {    
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+              id: id
+          })}
+    fetch(pageUrl+"/"+id,config).then(res => res.json()).then(obj=>{
+         debugger 
+    })
 }
 const showPageStart ={
     type: "SHOW_PAGE_START"

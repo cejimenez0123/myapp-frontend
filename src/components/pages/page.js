@@ -9,7 +9,7 @@ class Page extends React.Component{
             title:""
         }
     }
-    componentWillMount(){
+    componentWillReceiveProps(){
         console.log(this.props)
       let text  = this.props.page.text
       let title = this.props.page.title
@@ -18,11 +18,10 @@ class Page extends React.Component{
     handleOnChange(e){
         
         this.setState({[e.target.id] : e.target.value})
-        console.log(this.state)
+
     }
     handleOnSubmit(e){
         e.preventDefault()
-        debugger
        let text = e.target.querySelector("textarea").value
        let title = e.target.querySelector("input#title").value
     
@@ -32,6 +31,9 @@ class Page extends React.Component{
             } else {
             alert("Not saved yet")
         }
+    }
+    handleOnClick(){
+
     }
     
     render(){
@@ -46,6 +48,7 @@ class Page extends React.Component{
              col="100" row="100" id="text" value={this.state.text}/>
              <input type="submit" value="save"/>
         </form>
+        < button value="delete" onClick={()=>{this.handleOnClick()}}/>
         </div>
        
     )}
@@ -54,7 +57,7 @@ class Page extends React.Component{
 const mapDispatchToProps = (dispatch)=>{
     return{
         showPage: ()=>dispatch(showPage()),
-        updatePage: ()=>updatePage()
+        updatePage: (text,title)=>updatePage(text,title)
     }
 }
 

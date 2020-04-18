@@ -6,6 +6,7 @@ let pageUrl = "http://localhost/pages/"
 class PageContainer extends React.Component{
     componentDidMount(){
         this.props.getAllPages()
+        this.props.showPage()
     }
     renderPage(){
        return this.props.pages.flat().map((p,i)=>{

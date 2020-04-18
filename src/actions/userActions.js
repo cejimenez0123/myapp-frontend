@@ -39,6 +39,7 @@ function LOG_IN_START(){
         type: "LOG_IN_START"
     }
 }
+
 const LOG_IN = (user)=>{
     let config = {
         method: 'POST',
@@ -60,9 +61,14 @@ const LOG_IN = (user)=>{
     })
 }
 function SET_CURRENT_USER(){
-    return{
-        type: "SET_CURRENT_USER"
-    }
+    let id = localStorage.getItem("currentUser")
+    return((dispatch)=>{fetch(userPath+"/"+id).then(res=>res.json()).then(obj=>{dispatch({type: "SET_CURRENT_USER"})})
+    
+        
+    })
+}
+const showUser =()=>{
+
 }
 function getUsers(){
     
@@ -88,4 +94,4 @@ function getAllUserPages(){
 }
 
 
-export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers, getAllUserPages}
+export { LOG_IN,SIGN_UP, SIGN_UP_START, getUsers, getAllUserPages,SET_CURRENT_USER}

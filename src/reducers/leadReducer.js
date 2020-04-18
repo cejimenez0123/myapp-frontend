@@ -20,7 +20,9 @@ export default function leadReducer(
                
                 return {...state, users: [action.users], currentUser: state.currentUser,
                 loggedIn: state.loggedIn}
-                 
+            case "SET_CURRENT_USER":
+                debugger
+            return{...state}
                     
                 
             case "GET_USERS_START":

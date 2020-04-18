@@ -16,12 +16,14 @@ export default function pageReducer(
             return {...state,sharedPages: [...state.sharedPages,action.sharedPages.data] }
             case "SHOW_PAGE":
                 debugger
-                let page = action.page
+                let page = action.page.attributes
                return {...state,currentPage: page}
             case "SHOW_PAGE_START":
                 return {...state}
             case "GET_MY_PAGES":     
                 return{...state,myPages:[...state.myPages.concat(action.pages)]}
+            case "UPDATE_PAGE":
+                return {...state,docSaved: true}
             default:
                 return state
         }

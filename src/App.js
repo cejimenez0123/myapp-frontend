@@ -20,15 +20,12 @@ render(){
       <Router>
       {this.props.loggedIn ? <Redirect to={`/users/${this.props.currentUser.id}`} /> : <HomeContainer currentUser={this.props.currentUser} />}
       
-        <PrivateRoute path={`/pages/:id`} children={<PageContainer page={this.props.currentPage} showPage={this.props.showPage} pages={this.props.pages} getAllPages={this.props.getAllPages}/>}/>      
-        
-        
+        <PrivateRoute path={`/pages/:id`} children={<PageContainer page={this.props.currentPage} showPage={this.props.showPage} pages={this.props.pages} getAllPages={this.props.getAllPages}/>}/>  
         <Route path="/signin" >
                < FormContainer />
           </ Route>
-         
           <PrivateRoute exact path="/users/:userid" >
-              <ProfileContainer currentUser={this.props.currentUser} pages={this.props.pages}/>
+              <ProfileContainer currentUser={this.props.currentUser} pages={this.props.pages} showPage={this.props.showPage}/>
           </PrivateRoute>
           
      
