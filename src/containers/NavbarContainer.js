@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../App.css'
 import {Navbar,NavLink, NavbarBrand} from 'reactstrap'
 import {connect} from 'react-redux'
 class NavbarContainer extends Component{
@@ -8,25 +9,25 @@ class NavbarContainer extends Component{
         this.props.endSession()
     }
     renderIf(){
-        console.log("PRPRP",this.props.currentUser)
+        
         
         if (this.props.currentUser){
-            return (<div>
-            <NavLink href={`/users/${this.props.currentUser.id}`}> Profile</NavLink> 
-            <NavLink onClick={()=>this.handleOnClick} href={'/'}>Log Out</NavLink>
+            return (<div >
+            <NavLink className="NavLink" onClick={()=>{this.props.getUser()}} href={`/users/${this.props.currentUser.id}`}> Profile</NavLink> 
+            <NavLink className="NavLink" onClick={()=>this.handleOnClick} href={'/'}>Log Out</NavLink>
             </div>
             )
     }else{
-           return <NavLink href="/signin"> Sign In</NavLink> 
+           return <NavLink className="NavLink" href="/signin"> Sign In</NavLink> 
         }
     }
 
     render(){
-        console.log("nav",this.props)
+        
         return(
-            <div>
-                <Navbar style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }} >
-                    <NavbarBrand href="/"> Pb</NavbarBrand>
+            <div className="navBar">
+                <Navbar  >
+                    <NavbarBrand href="/"> <h2>Pb</h2></NavbarBrand>
                     {this.renderIf()}
                 </Navbar>
             </div>

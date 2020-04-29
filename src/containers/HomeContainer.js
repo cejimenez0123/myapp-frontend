@@ -8,7 +8,7 @@ export class HomeContainer extends Component{
     render(){
         return(
             <div>
-                < NavbarContainer  endSession={this.props.endSession} currentUser={this.props.currentUser}/>
+                < NavbarContainer getUser={this.props.getUser} endSession={this.props.endSession} currentUser={this.props.currentUser}/>
                 
             </div>
         ) 

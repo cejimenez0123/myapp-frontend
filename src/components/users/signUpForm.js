@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from 'react-redux'
-
+import "../../App.css"
 
 
 
@@ -28,7 +28,7 @@ class SignUpForm extends Component{
     }
     render(){
         return(
-            <div id="SignUpForm">
+            <div class="form">
                 <form onSubmit={this.handleOnSubmit}> 
                     <label htmlFor="name">Name:</label>
                     <input type="text" name="name" 

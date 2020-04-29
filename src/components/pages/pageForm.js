@@ -14,18 +14,23 @@ class PageForm extends React.Component{
         
     }
     handleOnSubmit(e){
+ 
         e.preventDefault()
        let text = e.target.querySelector("textarea").value
        let title = e.target.querySelector("input#title").value
    
         this.props.addPage(text,title)
+        
             if(this.props.docSaved){
+                
             alert("Document Saved")          
             } else {
+                
             alert("Not saved yet")
         }
     }
        render(){
+
         return(
             <div id="pageForm">
                 < button onClick={()=> this.hanldeOnClick()}> Make a Page</button>

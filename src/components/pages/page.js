@@ -1,5 +1,5 @@
 import React from 'react'
-import { showPage,updatePage} from '../../actions/pageActions'
+import { showPage,updatePage,DELETE_PAGE} from '../../actions/pageActions'
 import {connect} from 'react-redux'
 class Page extends React.Component{
     constructor(){
@@ -33,7 +33,7 @@ class Page extends React.Component{
         }
     }
     handleOnClick(){
-
+        this.props.deletePage(this.props.page.id)
     }
     
     render(){
@@ -48,7 +48,7 @@ class Page extends React.Component{
              col="100" row="100" id="text" value={this.state.text}/>
              <input type="submit" value="save"/>
         </form>
-        < button value="delete" onClick={()=>{this.handleOnClick()}}/>
+        < button type="button"  onClick={()=>{this.handleOnClick()}}>Delete</button>
         </div>
        
     )}
@@ -57,8 +57,9 @@ class Page extends React.Component{
 const mapDispatchToProps = (dispatch)=>{
     return{
         showPage: ()=>dispatch(showPage()),
-        updatePage: (text,title)=>updatePage(text,title)
-    }
+        updatePage: (text,title)=>updatePage(text,title),
+        deletePage: (id)=>(DELETE_PAGE(id))
+        }
 }
 
 export default connect(null,mapDispatchToProps)(Page)

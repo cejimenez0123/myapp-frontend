@@ -18,7 +18,7 @@ function SIGN_UP (user) {
             fetch(userPath,config)
                 .then(res => res.json())
                 .then(obj =>{
-                
+               
                     let user =  obj.data.attributes
                     localStorage.setItem("currentUser",user.id)
                     dispatch({ type: 'SIGN_UP', user})
@@ -54,19 +54,26 @@ const LOG_IN = (user)=>{
     return ((dispatch)=>{
         dispatch(LOG_IN_START);
        
-        fetch(loginPath,config).then(res=>res.json()).then(user =>{
-            user = user.data.attributes
-            dispatch({type: "LOG_IN",user})
-        })
+        fetch(loginPath,config).then(res=>res.json()).then(user =>
+   {
+        user = user.data.attributes
+        dispatch({type: "LOG_IN",user})
+        }).catch(error=>window.alert("incorrent username or password"))
     })
 }
-function SET_CURRENT_USER(){
+const SET_CURRENT_USER=()=>{
     let id = localStorage.getItem("currentUser")
-    return((dispatch)=>{fetch(userPath+"/"+id).then(res=>res.json()).then(obj=>{dispatch({type: "SET_CURRENT_USER"})})
+
+  return ((dispatch)=>{
+      dispatch({type:"START_SET_CURRENT_USER"})
+      fetch(userPath+"/"+id).then(res=>res.json()).then(obj=>{
+        let user = obj.data.attributes
+        dispatch({ type: "SET_CURRENT_USER",user})})
     
         
     })
 }
+
 const END_CURRENT_USER=(dispatch)=>{
 
     dispatch({type:"END_CURRENT_USER"})
@@ -89,7 +96,6 @@ function getAllUserPages(){
     return((dispatch)=>{
         fetch(userPath+"/"+id+"/pages").then(res => res.json()).then(
             obj => {
-               debugger
                 let pages = obj.data
                 dispatch({type: "GET_MY_PAGES",pages})}
         )

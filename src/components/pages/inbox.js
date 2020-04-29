@@ -1,27 +1,26 @@
 import React from 'react'
 import PageLinkBox from './PageLinkBox'
 
-export class Inbox extends React.Component{
+export const Inbox = (props)=> {
 
     
-    
-    renderBox(){
-      
-       return this.props.myPages.map((page,i)=>{
+  
+    const renderBox=()=>{  
+       return props.myPages.map((page,i)=>{
             let p = page.attributes
-             return < PageLinkBox key={i} id={i} page={p} users={this.props.users} currentUser={this.props.currentUser} getAllPages={this.props.getAllPages} showPage={this.props.showPage}/>
+             return < PageLinkBox key={i} id={i} page={p} users={props.users} currentUser={props.currentUser} getAllPages={props.getAllPages} showPage={props.showPage} sharedPages={props.sharedPages}/>
               
          })
-    }
+        }
 
 
-    render(){
+    
       
         return(
             <div>
                 <h2>Inbox</h2>
-            {this.renderBox()}
+            {renderBox()}
             </div>
         )
-    }
+    
 }

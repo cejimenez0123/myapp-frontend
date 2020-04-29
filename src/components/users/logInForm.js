@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import "../../App.css"
 
 class LogInForm extends Component{
     constructor(){
@@ -21,7 +21,7 @@ class LogInForm extends Component{
     }
     render(){
         return(
-            <div id="LogInForm">
+            <div class="form">
                 <form onSubmit={this.handleOnSubmit}> 
                     <label htmlFor="username">Username:</label>
                     <input type="text" name="username" onChange={this.handleOnChange}/>

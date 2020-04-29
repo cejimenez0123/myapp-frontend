@@ -3,23 +3,25 @@ import { Link } from 'react-router-dom'
 import {sharePage} from '../../actions/pageActions'
 export default function PageLinkBox(props) {
     const handleLinking=(id)=>{
-        debugger
         
         localStorage.setItem("pageLink",id)
 
     }
     const handleOnSubmit=(e)=>{
         e.preventDefault()
-
+        debugger
          let inputs = Array.from(e.target.getElementsByClassName("userCheckBox"))
      let checkedInputs = inputs.filter(input =>input.checked ===  true
          )
-         sharePage(checkedInputs)
+         checkedInputs.map(input =>{
+            sharePage(input)
+         })
+         
      
     }
 
- const toggleDisplay = ()=>{
-     let obj = document.getElementById("userShareList")
+ const toggleDisplay = (e)=>{
+     let obj = document.querySelector(".userShareList-"+e.target.id)
      
      if (obj.style.display === "none"){
          obj.style.display = "block"
@@ -28,6 +30,17 @@ export default function PageLinkBox(props) {
      }
 
  }
+  const like=( )=>{
+     let inputs = document.querySelectorAll(".userCheckBox")
+    inputs = Array.from(inputs)
+    let likeBtn= document.createElement("button")
+    inputs.map(i=>{
+        debugger
+    })
+   
+
+
+  }
  console.log(props)
 
     let p = props.page
@@ -36,12 +49,13 @@ export default function PageLinkBox(props) {
         <li key={i}><Link onClick={()=>handleLinking(p.id)} key={i} to={`/pages/${p.id}`}>
                          {p.title}
                      </Link>
-                     <button onClick={()=>{toggleDisplay()}}>Share</button>
+                     <button onClick={(e)=>{toggleDisplay(e)}}>Share</button>
                    
-                     <div id="userShareList"style={{display: "none"}}>
+                     <div className={`userShareList-${p.id}`}style={{display: "none"}}>
                      <form onSubmit={(e)=>handleOnSubmit(e)}>
                          <ul>
-                         {props.users.flat().slice(0,6).map((u,i)=>{   
+                         {props.users.flat().slice(0,6).map((u,i)=>{  
+                             
                             if(u.id !== props.currentUser.id){
                                let user = u.attributes
                             return (<li key={i}>
@@ -55,9 +69,7 @@ export default function PageLinkBox(props) {
                      </form>
                  </div>
                         
-                     </li>)
-                    
-                 
+                     </li>)      
         
         
 }

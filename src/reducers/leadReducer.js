@@ -4,7 +4,8 @@ import { history } from '../helpers/history'
 export default function leadReducer(
     state={users: [],
         currentUser: null,
-    loggedIn: false },
+    loggedIn: false,
+requesting: false },
     action){
     
         switch (action.type){
@@ -15,14 +16,18 @@ export default function leadReducer(
                 let user = action.user
                 return {...state, users: [...state.users.concat(user)],
                     currentUser: user, loggedIn: true }
+            case "GET_USERS_START":
+                return {...state,requesting: true}
             case "GET_USERS":
-             
-               
-                return {...state, users: [action.users], currentUser: state.currentUser,
+                let m =action.users.flat()
+               console.log("m",m)
+                return {...state, users: [m], currentUser: state.currentUser,
                 loggedIn: state.loggedIn}
+            case "START_SET_CURRENT_USER":
+                return {...state,requesting: true}
             case "SET_CURRENT_USER":
-                debugger
-            return{...state}
+            
+            return{...state,currentUser: action.user, loggedIn: true}
                 case "END_CURRENT_USER": 
                 return{...state,currentUser:null,loggedIn: false} 
                 
