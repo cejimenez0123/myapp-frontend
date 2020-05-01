@@ -18,7 +18,10 @@ class UserLike extends React.Component{
     }
     handleOnClick(){
         let i = this.state.likes
-        i+=1
+       
+         
+        this.setState({...this.state,likes: i+=1, liked: false})
+        
     }
 
 
